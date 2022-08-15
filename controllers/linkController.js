@@ -1,6 +1,6 @@
 const Link = require('../models/Link');
 
-const redirect = async (req, res) =>{
+const redirect = async (req, res) => {
     // Aqui ele coloca o valor do argumento em uma variavel
     let title = req.params.title;
 
@@ -12,8 +12,21 @@ const redirect = async (req, res) =>{
         // Aqui ele entrega como resposta já um redicionamento para a URL que tem no meu banco
         res.redirect(docs.url);
     } catch (err) {
-        res.send("Houve um erro");
+        res.send(err);
     }
 }
 
-module.exports = {redirect};
+const addLink = async (req, res) => {
+
+    let link = new Link(req.body);
+
+    try {
+        let doc = await link.save();
+        res.send(doc);
+    } catch (err){
+        res.send(err);
+    }
+
+}
+
+module.exports = { redirect, addLink };
