@@ -14,4 +14,8 @@ router.get('/', (req, res) => res.render('index', { err: false, body: {} }));
 // Post para inserir no banco de dados
 router.post('/', express.urlencoded({ extended: true }), linkController.addLink);
 
+router.delete('/:id', linkController.deleteLink)
+
+router.delete('/', express.json(), linkController.deleteLink)
+
 module.exports = router;
